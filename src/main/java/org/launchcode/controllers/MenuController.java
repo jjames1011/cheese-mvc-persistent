@@ -12,7 +12,7 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.List;
+
 
 @Controller
 @RequestMapping("menu")
@@ -74,17 +74,19 @@ public class MenuController {
 
     @RequestMapping(value= "add-item", method = RequestMethod.POST)
     public String addItem(Model model, @ModelAttribute @Valid AddMenuItemForm form, Errors errors){
+
         if(errors.hasErrors()){
             model.addAttribute("form", form);
             return "menu/add-item";
-        }else{
-            Menu menu = menuDao.findOne(form.getMenuId());
-            Cheese cheese = cheeseDao.findOne(form.getCheeseId());
-            menu.addItem(cheese);
-            menuDao.save(menu);
-
-            return "redirect:/menu/view/" + menu.getId();
         }
+
+        Menu menu = menuDao.findOne(form.getMenuId());
+        Cheese cheese = cheeseDao.findOne(form.getCheeseId());
+        menu.addItem(cheese);
+        menuDao.save(menu);
+
+        return "redirect:/menu/view/" + menu.getId();
+
 
 
     }

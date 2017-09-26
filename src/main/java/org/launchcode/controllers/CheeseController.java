@@ -60,7 +60,7 @@ public class CheeseController {
         newCheese.setCategory(cat);
 
         cheeseDao.save(newCheese);
-        return "redirect:";
+        return "redirect:/cheese";
     }
 
     @RequestMapping(value = "remove", method = RequestMethod.GET)
@@ -77,7 +77,7 @@ public class CheeseController {
             cheeseDao.delete(cheeseId);
         }
 
-        return "redirect:";
+        return "redirect:/cheese";
     }
 
 }
